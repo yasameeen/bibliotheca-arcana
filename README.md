@@ -81,12 +81,16 @@ bibliotheca-arcana/
 
 ---
 
-## 🔁 Pipeline CI/CD
+## ⚙️ CI/CD com GitHub Actions
 
-O projeto utiliza **GitHub Actions** para integração e entrega contínuas:
+O pipeline roda automaticamente a cada `push` ou `pull request` e tem dois jobs:
 
-- **CI** — compila e valida o código a cada push
-- **CD** — empacota e publica o artefato automaticamente
+| Job | Tipo | O que faz |
+|-----|------|-----------|
+| `build` | CI | Configura Java 17 e compila o projeto |
+| `deploy` | CD | Builda a imagem Docker e testa o container |
+
+> O job `deploy` só roda se o `build` passar com sucesso.
 
 ---
 
