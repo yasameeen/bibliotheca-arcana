@@ -1,4 +1,3 @@
-cat > README.md << 'ENDOFFILE'
 # 📚 Bibliotheca Arcana
 
 > *"Um sistema de gerenciamento de biblioteca virtual, onde cada estrutura de dados conta uma história."*
@@ -46,7 +45,7 @@ docker run --rm bibliotheca-arcana
 
 ## 🪐 Estrutura do projeto
 
-\`\`\`
+```text
 bibliotheca-arcana/
 ├── .github/workflows/ci-cd.yml      # Pipeline CI/CD
 ├── Livro.java                        # Modelo principal
@@ -73,4 +72,3 @@ O pipeline roda automaticamente a cada \`push\` ou \`pull request\` com dois job
 | \`deploy\` | CD | Builda a imagem Docker e testa o container |
 
 > O job \`deploy\` só roda se o \`build\` passar com sucesso.
-ENDOFFILE
