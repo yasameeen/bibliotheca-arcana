@@ -56,7 +56,7 @@ bibliotheca-arcana/
 ├── Main.java                         # Demonstração completa
 ├── Dockerfile                        # Containerização
 └── README.md
-\`\`\`
+```
 
 ---
 
@@ -64,11 +64,11 @@ bibliotheca-arcana/
 
 [![CI/CD Pipeline](https://github.com/yasameeen/bibliotheca-arcana/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/yasameeen/bibliotheca-arcana/actions/workflows/ci-cd.yml)
 
-O pipeline roda automaticamente a cada \`push\` ou \`pull request\` com dois jobs:
+O pipeline roda automaticamente a cada `push` ou `pull request` com dois jobs:
 
 | Job | Tipo | O que faz |
 |-----|------|-----------|
-| \`build\` | CI | Configura Java 17 e compila o projeto |
-| \`deploy\` | CD | Builda a imagem Docker e testa o container |
+| `build` | CI | Configura Java 17 e compila o projeto |
+| `deploy` | CD | Builda a imagem Docker e testa o container |
 
-> O job \`deploy\` só roda se o \`build\` passar com sucesso.
+> O job `deploy` só roda se o `build` passar com sucesso.
