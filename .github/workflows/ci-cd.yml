@@ -17,7 +17,7 @@ jobs:
       - name: Configurar Java 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'eclipse-temurin'
+          distribution: 'temurin'
           java-version: '17'
 
       - name: Compilar o projeto
@@ -48,13 +48,11 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           if [ "${{ needs.build.result }}" == "success" ] && [ "${{ needs.deploy.result }}" == "success" ]; then
-            STATUS="✅ Sucesso"
+            STATUS="📖 SUCESSO! Feitiço enviado com cuidado aos elfos para guardarmos no grimório!"
             COLOR=3066993
-            EMOJI="🔮"
           else
-            STATUS="❌ Falha"
+            STATUS="💀 FALHA! O feitiço não foi enviado para os elfos guardarem no grimório!"
             COLOR=15158332
-            EMOJI="💀"
           fi
 
           if [ "${{ github.event_name }}" == "push" ]; then
@@ -62,21 +60,21 @@ jobs:
           else
             EVENT="Pull Request"
           fi
-          
+
           curl -H "Content-Type: application/json" \
                -X POST \
                -d "{
                  \"embeds\": [{
-                   \"title\": \"$EMOJI Bibliotheca Arcana — CI/CD\",
-                   \"description\": \"**$STATUS** no pipeline!\",
+                   \"title\": \"🔮 Bibliotheca Arcana — Câmara dos Segredos\",
+                   \"description\": \"🦉 O bibliotecário está relatando algo...\n\n$STATUS\",
                    \"color\": $COLOR,
                    \"fields\": [
-                     { \"name\": \"📌 Evento\", \"value\": \"$EVENT\", \"inline\": true },
-                     { \"name\": \"👤 Autor\", \"value\": \"${{ github.actor }}\", \"inline\": true },
-                     { \"name\": \"🔨 Build\", \"value\": \"${{ needs.build.result }}\", \"inline\": true },
-                     { \"name\": \"🐳 Deploy\", \"value\": \"${{ needs.deploy.result }}\", \"inline\": true },
-                     { \"name\": \"📝 Commit\", \"value\": \"${{ github.event.head_commit.message }}\", \"inline\": false },
-                     { \"name\": \"🔗 Link\", \"value\": \"[Ver no GitHub](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\", \"inline\": false }
+                     { \"name\": \"⚗️ Resultado do lançamento do feitiço (build)\", \"value\": \"${{ needs.build.result }}\", \"inline\": true },
+                     { \"name\": \"🐉 A invocação (deploy) foi\", \"value\": \"${{ needs.deploy.result }}\", \"inline\": true },
+                     { \"name\": \"📜 O Pergaminho anotou o principal afetado\", \"value\": \"$EVENT\", \"inline\": false },
+                     { \"name\": \"✍️ Escribão responsável pelo feitiço foi\", \"value\": \"${{ github.actor }}\", \"inline\": true },
+                     { \"name\": \"🪶 A crônica de onde veio o feitiço está na página (commit)\", \"value\": \"${{ github.event.head_commit.message }}\", \"inline\": false },
+                     { \"name\": \"🔗 Para ver o tomo do problema, entre no portal\", \"value\": \"[Abrir portal](${GITHUB_SERVER_URL}/${{ github.repository }}/actions/runs/${{ github.run_id }})\", \"inline\": false }
                    ]
                  }]
                }" \
