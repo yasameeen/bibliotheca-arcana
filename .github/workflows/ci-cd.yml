@@ -21,8 +21,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Baixar JUnit 5
+        run: |
+          mkdir -p lib
+          curl -L -o lib/junit.jar \
+            https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
+
       - name: Compilar o projeto
-        run: javac *.java
+        run: javac -cp lib/junit.jar *.java
 
       - name: Verificar compilação
         run: echo "✦ Compilação concluída com sucesso!"
